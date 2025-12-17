@@ -1,0 +1,22 @@
+import { Module } from '@nestjs/common';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { UserController } from './user/user.controller';
+import { ProductService } from './product/product.service';
+import { ProductController } from './product/product.controller';
+import { EmployeeModule } from './employee/employee.module';
+import { ConfigModule } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
+import { StudentModule } from './student/student.module';
+
+@Module({
+  imports: [
+    EmployeeModule,
+    ConfigModule.forRoot({ isGlobal: true }),
+    MongooseModule.forRoot(process.env.MONGODB_URL!),
+    StudentModule,
+  ],
+  controllers: [AppController, UserController, ProductController],
+  providers: [AppService, ProductService],
+})
+export class AppModule {}
