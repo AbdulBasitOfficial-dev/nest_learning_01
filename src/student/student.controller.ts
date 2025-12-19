@@ -5,7 +5,7 @@ import {
   Get,
   Param,
   Delete,
-  Patch,
+  Put,
 } from '@nestjs/common';
 import { StudentService } from './student.service';
 import { Student } from './student.schema';
@@ -34,7 +34,7 @@ export class StudentController {
     return this.studentService.removeStudentByID(id);
   }
 
-  @Patch(':id')
+  @Put(':id')
   async update(@Param('id') id: string, @Body() data: Partial<Student>) {
     return this.studentService.updateStudentByID(id, data);
   }

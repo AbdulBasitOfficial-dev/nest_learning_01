@@ -30,18 +30,20 @@ export class StudentService {
 
   //   Delete By Id
   async removeStudentByID(id: string) {
-    const student = await this.studentModel.findByIdAndDelete(id);
+    const student = await this.studentModel.findByIdAndDelete(id).exec();
     if (!student) {
       throw new NotFoundException('Student is not found');
     }
     return { message: 'Student Deleted Successfully', data: student };
   }
 
-  //   Update By Id
+  //   Update By Id Put
   async updateStudentByID(id: string, data: Partial<Student>) {
-    const student = await this.studentModel.findByIdAndUpdate(id, data, {
-      new: true,
-    });
+    const student = await this.studentModel
+      .findByIdAndUpdate(id, data, {
+        new: true,
+      })
+      .exec();
     if (!student) {
       throw new NotFoundException('Student is not found');
     }
